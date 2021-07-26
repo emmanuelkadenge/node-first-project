@@ -1,21 +1,17 @@
-const http = require('http');
 const express = require('express')
+const bodyParser = require('body-parser')
 const app = express();
+app.use(bodyParser.urlencoded({extended : false}))
 
-app.use((req, res, next) => {
-    console.log('In the first middleware')
-    next()
-});
-
-app.use((req, res, next) => {
-    console.log('In the second Middle ware')
-    next()
+app.get('/add-product',(req, res, next) => {
+    res.send('<form method="post" action="/product"><input type="text" name="Tittle"><button type="submit">Add Product</button></form>')
+})
+app.post('/product',(req, res, next) => {
+    console.log(req.body)
+    res.redirect('/')
+})
+app.get('/',(req, res, next) => {
+    res.send('<h1>This is the express Server !!!!!!!</h1>')
 })
 
-app.use((req, res, next) => {
-    res.send('Hello there and welcome to Express Javascript')
-})
-
-const server = http.createServer(app)
-
-server.listen(5000)
+app.listen(3000)

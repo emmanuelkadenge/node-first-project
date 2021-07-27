@@ -1,11 +1,12 @@
 const express = require('express');
 const app = express();
-const bodyParser = require('body-parser');
-const adminRouter = require('/routes/admin')
-const shopRouter = require('./routes/shop')
+const adminRouter = require('./router/admin');
+const shopRouter = require('./router/shop');
 
-app.use(bodyParser.urlencoded({extended : false}))
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.urlencoded({extended : false}));
 app.use(adminRouter);
 app.use(shopRouter);
 
-app.listen(3000)
+app.listen(3000);
